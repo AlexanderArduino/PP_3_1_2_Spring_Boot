@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All users</title>
+    <style>
+        .table {
+            border-top-width: medium;
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            font-size: 25px;
+            letter-spacing: -1px;
+            word-spacing: 1px;
+            width: 70%;
+            margin: auto;
+            margin-bottom: 20px;
+            border: 1px solid #dddddd;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        .table th {
+            font-weight: bold;
+            padding: 5px;
+            background: #efefef;
+            border: 1px solid #dddddd;
+        }
+        .table td {
+            border: 1px solid #dddddd;
+            padding: 5px;
+        }
+
+
+        .demoFont {
+            text-align: center;
+            border-top-width: medium;
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            font-size: 25px;
+            letter-spacing: -1px;
+            word-spacing: 1px;
+            color: #000000;
+            font-weight: 400;
+            text-decoration: none;
+            font-style: normal;
+            font-variant: small-caps;
+            text-transform: none;
+        }
+
+    </style>
+</head>
+<body>
+<div class="demoFont">Users Table</div>
+<!-- Используя таблицу -->
+<table th:border="1" class="table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Age</th>
+        <th>Email</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Использование Thymeleaf для отображения данных из модели -->
+    <tr th:each="user : ${allusers}">
+        <td th:text="${user.getId()}">ID</td>
+        <td th:text="${user.getName()}">Name</td>
+        <td th:text="${user.getSurname()}">Surname</td>
+        <td th:text="${user.getAge()}">Age</td>
+        <td th:text="${user.getEmail()}">Email</td>
+        <td>
+            <button type="button" class="demoFont" name="button_update"><a
+                    th:href="@{/edituserbyid?id={id}(id=${user.getId()})}">EDIT</a></button>
+        </td>
+        <td>
+            <button type="button" class="demoFont" name="button_delete"><a
+                    th:href="@{/userdelete?id={id}(id=${user.getId()})}">DELETE</a></button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<button type="button" class="demoFont" name="button"><a href="/addnewuser">Add new user</a></button>
+
+</body>
+</html>
